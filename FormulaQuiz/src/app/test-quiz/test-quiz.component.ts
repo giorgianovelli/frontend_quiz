@@ -14,6 +14,7 @@ export class TestQuizComponent implements OnInit {
   ngOnInit() {
     this.refreshScore();
     this.refreshQuestions();
+    this.logIn();
   }
 
   refreshScore() {
@@ -26,6 +27,14 @@ export class TestQuizComponent implements OnInit {
 
   refreshQuestions() {
     return this.quizService.getQuestions()
+      .pipe(
+        tap(console.log)
+      )
+      .subscribe();
+  }
+
+  logIn() {
+    return this.quizService.postLogIn()
       .pipe(
         tap(console.log)
       )
