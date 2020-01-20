@@ -11,10 +11,15 @@ export class TestQuizService {
       'Content-Type': 'application/json'
     })
   };
-  postData = {
+  postLog = {
     email: 'giorgia@gmail.com',
     password_hash: 'giorgia'
   };
+  postSign = {
+    email: 'registrazione3@gmail.com',
+    nome: 'registrazione',
+    password_hash: 'provareg'
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +32,18 @@ export class TestQuizService {
   }
   // POST registrazione, log in, partita
   postLogIn() {
-    return this.http.post(`${this.url}/login`, this.postData, this.httpOptions );
+    return this.http.post(`${this.url}/login`, this.postLog, this.httpOptions );
+  }
+
+  postSignUp() {
+    return this.http.post(`${this.url}/signup`, this.postSign, this.httpOptions);
+  }
+
+  hello() {
+    return this.http.get(`${this.url}/hello`);
+  }
+
+  logOut() {
+    return this.http.get(`${this.url}/logout`);
   }
 }

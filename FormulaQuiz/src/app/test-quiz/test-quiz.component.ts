@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TestQuizService} from '../api/test-quiz.service';
-import {tap} from 'rxjs/operators';
+import {finalize, tap} from 'rxjs/operators';
+import {concat, merge, pipe} from 'rxjs';
 
 @Component({
   selector: 'app-test-quiz',
@@ -8,12 +9,21 @@ import {tap} from 'rxjs/operators';
   styleUrls: ['./test-quiz.component.scss']
 })
 export class TestQuizComponent implements OnInit {
+  loading = true;
 
   constructor(private quizService: TestQuizService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.refreshScore();
     this.refreshQuestions();
+    /*concat(
+      this.logIn(),
+      this.hello()
+      ).pipe(
+      finalize(() => this.loading = false)
+    ).subscribe();*/
+    // this.signUp();
     this.logIn();
   }
 
@@ -37,8 +47,28 @@ export class TestQuizComponent implements OnInit {
     return this.quizService.postLogIn()
       .pipe(
         tap(console.log)
-      )
-      .subscribe();
+      ).subscribe();
+  }
+
+  signUp() {
+    return this.quizService.postSignUp()
+      .pipe(
+        tap(console.log)
+      ).subscribe();
+  }
+
+  hello() {
+    return this.quizService.hello()
+      .pipe(
+        tap(console.log)
+      ).subscribe();
+  }
+
+  logOut() {
+    return this.quizService.logOut()
+      .pipe(
+        tap(console.log)
+      ).subscribe();
   }
 
 }
