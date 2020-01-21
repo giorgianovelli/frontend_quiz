@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TestQuizService} from '../api/test-quiz.service';
 import {tap} from 'rxjs/operators';
 import {AuthService} from '../api/auth.service';
+import {concat} from 'rxjs';
 
 @Component({
   selector: 'app-test-quiz',
@@ -16,7 +17,6 @@ export class TestQuizComponent implements OnInit {
   ngOnInit() {
     // this.loading = true;
     this.refreshScore();
-    this.refreshQuestions();
     this.logIn();
   }
 
@@ -32,15 +32,12 @@ export class TestQuizComponent implements OnInit {
     return this.quizService.getQuestions()
       .pipe(
         tap(console.log)
-      )
-      .subscribe();
+      ).subscribe();
   }
 
   logIn() {
     return this.authService.loginWithUsernameAndPassword('giorgia@gmail.com', 'giorgia')
-      .pipe(
-        tap(console.log)
-      ).subscribe();
+      .subscribe();
   }
 
   /*signUp() {
@@ -49,6 +46,13 @@ export class TestQuizComponent implements OnInit {
         tap(console.log)
       ).subscribe();
   }*/
+
+  getProtected() {
+    return this.quizService.getProtected()
+      .pipe(
+        tap(console.log)
+      ).subscribe();
+  }
 
   logOut() {
     return this.authService.logout();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {CookieService} from 'ngx-cookie-service';
-import {map} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {tap} from 'rxjs/operators';
+import {Credentials, IdentityService} from '../core/identity.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,40 +12,34 @@ export class AuthService {
     email: 'giorgia@gmail.com',
     password: 'giorgia'
   };
-
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(
+    private http: HttpClient,
+    private identityService: IdentityService) { }
 
   /*checkToken() {
     return this.cookieService.check('token');
   }*/
 
   getToken() {
-    return this.cookieService.get('token');
+    return this.identityService.get().access_token;
   }
 
   loginWithUsernameAndPassword(email: string, password: string) { // TODO usare parametri
     return this.http.post<any>(`${this.url}/login`,
       this.postLog,
-      {
-        // headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Accept', 'application/json')
-      }
-      ).pipe(map(user => {
-        if (user && user.token) {
-          this.cookieService.set('token', user.token);
-        }
-        return user;
-    }));
+    ).pipe(
+        tap((user: Credentials) => {
+          this.identityService.set(user);
+        })
+    );
   }
 
   logout() {
-    this.cookieService.delete('token');
+    localStorage.clear();
   }
 
   isLoggedIn() {
-    return this.cookieService.check('token');
+    return this.identityService.isLogged();
   }
 
 }
