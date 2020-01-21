@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TestQuizService} from '../api/test-quiz.service';
-import {finalize, tap} from 'rxjs/operators';
-import {concat, merge, pipe} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {AuthService} from '../api/auth.service';
 
 @Component({
   selector: 'app-test-quiz',
@@ -9,21 +9,14 @@ import {concat, merge, pipe} from 'rxjs';
   styleUrls: ['./test-quiz.component.scss']
 })
 export class TestQuizComponent implements OnInit {
-  loading = true;
+  // loading = true;
 
-  constructor(private quizService: TestQuizService) { }
+  constructor(private quizService: TestQuizService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.loading = true;
+    // this.loading = true;
     this.refreshScore();
     this.refreshQuestions();
-    /*concat(
-      this.logIn(),
-      this.hello()
-      ).pipe(
-      finalize(() => this.loading = false)
-    ).subscribe();*/
-    // this.signUp();
     this.logIn();
   }
 
@@ -44,31 +37,21 @@ export class TestQuizComponent implements OnInit {
   }
 
   logIn() {
-    return this.quizService.postLogIn()
+    return this.authService.loginWithUsernameAndPassword('giorgia@gmail.com', 'giorgia')
       .pipe(
         tap(console.log)
       ).subscribe();
   }
 
-  signUp() {
+  /*signUp() {
     return this.quizService.postSignUp()
       .pipe(
         tap(console.log)
       ).subscribe();
-  }
-
-  hello() {
-    return this.quizService.hello()
-      .pipe(
-        tap(console.log)
-      ).subscribe();
-  }
+  }*/
 
   logOut() {
-    return this.quizService.logOut()
-      .pipe(
-        tap(console.log)
-      ).subscribe();
+    return this.authService.logout();
   }
 
 }

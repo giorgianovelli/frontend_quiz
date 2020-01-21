@@ -31,19 +31,15 @@ export class TestQuizService {
     return this.http.get(`${this.url}/match`);
   }
   // POST registrazione, log in, partita
-  postLogIn() {
+  /*postLogIn() {
     return this.http.post(`${this.url}/login`, this.postLog, this.httpOptions );
-  }
+  }*/
 
   postSignUp() {
     return this.http.post(`${this.url}/signup`, this.postSign, this.httpOptions);
   }
 
-  hello() {
-    return this.http.get(`${this.url}/hello`);
-  }
-
-  logOut() {
+  /*logOut() {
     return this.http.get(`${this.url}/logout`);
-  }
+  }*/
 }
