@@ -54,6 +54,14 @@ export class TestQuizComponent implements OnInit {
       ).subscribe();
   }
 
+
+  saveMatch() {
+    return this.quizService.saveMatch()
+      .pipe(
+        tap(console.log)
+      ).subscribe();
+  }
+
   logOut() {
     return this.authService.logout();
   }

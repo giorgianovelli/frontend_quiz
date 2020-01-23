@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +20,21 @@ export class TestQuizService {
     nome: 'registrazione',
     password_hash: 'provareg'
   }
+  postMatch = {
+    domande: [
+      {
+        testo: 'quanto fa 7*4?',
+        giusta: '28',
+        risposte: ['28', '21', '35']
+      }
+    ],
+    risposte_corrette: '28',
+    punteggio: '100',
+    durata_sessione: '15',
+    stato_partita: 'terminata'
+  }
 
-  constructor(private http: HttpClient, private auth: AuthService) { }
+  constructor(private http: HttpClient) { }
 
   getScore() {
     return this.http.get(this.url);
@@ -36,6 +48,10 @@ export class TestQuizService {
   }
   postSignUp() {
     return this.http.post(`${this.url}/signup`, this.postSign, this.httpOptions);
+  }
+
+  saveMatch() {
+    return this.http.post(`${this.url}/match`, this.postMatch , this.httpOptions );
   }
 
   /*logOut() {
