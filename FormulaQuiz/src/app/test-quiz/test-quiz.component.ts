@@ -47,13 +47,6 @@ export class TestQuizComponent implements OnInit {
       ).subscribe();
   }*/
 
-  getProtected() {
-    return this.quizService.getProtected()
-      .pipe(
-        tap(console.log)
-      ).subscribe();
-  }
-
 
   saveMatch() {
     return this.quizService.saveMatch()

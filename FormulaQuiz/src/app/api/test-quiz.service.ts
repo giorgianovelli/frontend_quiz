@@ -43,9 +43,7 @@ export class TestQuizService {
   getQuestions() {
     return this.http.get(`${this.url}/match`);
   }
-  getProtected() {
-    return this.http.get(`${this.url}/protected`);
-  }
+
   postSignUp() {
     return this.http.post(`${this.url}/signup`, this.postSign, this.httpOptions);
   }
@@ -54,7 +52,4 @@ export class TestQuizService {
     return this.http.post(`${this.url}/match`, this.postMatch , this.httpOptions );
   }
 
-  /*logOut() {
-    return this.http.get(`${this.url}/logout`);
-  }*/
 }
