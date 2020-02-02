@@ -1,0 +1,12 @@
+<div class="mr-md-3 px-3 pt-3 pt-md-5 col-sm-4 sidebar text-white overflow-hidden">
+  <div class="my-3 py-3">
+    <h2 class="display-8">Score</h2>
+    <div *ngIf="loading"><h2>Loading...</h2></div>
+    <ng-container  *ngIf="!loading">
+      <li *ngFor="let item of standing">
+        {{item.player}}
+        {{item.score}}
+      </li>
+    </ng-container>
+  </div>
+</div>

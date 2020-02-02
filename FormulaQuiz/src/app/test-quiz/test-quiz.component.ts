@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {TestQuizService} from '../api/test-quiz.service';
 import {tap} from 'rxjs/operators';
 import {AuthService} from '../api/auth.service';
-import {concat} from 'rxjs';
 
 @Component({
   selector: 'app-test-quiz',

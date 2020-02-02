@@ -19,20 +19,40 @@ export class TestQuizService {
     email: 'registrazione3@gmail.com',
     nome: 'registrazione',
     password_hash: 'provareg'
-  }
+  };
   postMatch = {
     domande: [
       {
-        testo: 'quanto fa 7*4?',
-        giusta: '28',
-        risposte: ['28', '21', '35']
+        testo: 'Chi ha vinto il Gran Premio di Montecarlo del 2015?',
+        giusta: 'Rosberg',
+        risposte: ['Hamilton', 'Rosberg', 'Vettel']
+      },
+      {
+        testo: 'Chi ha vinto il campionato del mondo nel 2007?',
+        giusta: 'Raikkonen',
+        risposte: ['Raikkonen', 'Hamilton', 'Massa']
+      },
+      {
+        testo: 'Quale costruttore ha vinto il campionato del mondo nel 1998?',
+        giusta: 'McLaren',
+        risposte: ['Ferrari', 'Williams', 'McLaren']
       }
     ],
-    risposte_corrette: '28',
-    punteggio: '100',
-    durata_sessione: '15',
+    risposte_corrette: [
+      {
+        testo: 'Chi ha vinto il Gran Premio di Montecarlo del 2015?',
+        risposta: 'Rosberg',
+      },
+      {
+        testo: 'Quale costruttore ha vinto il campionato del mondo nel 1998?',
+        risposta: 'McLaren'
+      }
+    ],
+    punteggio: '98',
+    durata_sessione: '5',
     stato_partita: 'terminata'
-  }
+  };
+
 
   constructor(private http: HttpClient) { }
 

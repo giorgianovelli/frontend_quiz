@@ -16,17 +16,16 @@ export class AuthService {
     private http: HttpClient,
     private identityService: IdentityService) { }
 
-  /*checkToken() {
-    return this.cookieService.check('token');
-  }*/
-
   getToken() {
     return this.identityService.get().access_token;
   }
 
-  loginWithUsernameAndPassword(email: string, password: string) { // TODO usare parametri
+  loginWithUsernameAndPassword(id: string, pwd: string) {
     return this.http.post<any>(`${this.url}/login`,
-      this.postLog,
+      {
+        email: id,
+        password: pwd
+      },
     ).pipe(
         tap((user: Credentials) => {
           this.identityService.set(user);

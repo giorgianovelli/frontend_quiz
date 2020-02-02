@@ -8,16 +8,22 @@ import { TestQuizComponent } from './test-quiz/test-quiz.component';
 import {AuthService} from './api/auth.service';
 import {CookieService} from 'ngx-cookie-service';
 import {TokenInterceptor} from './TokenInterceptor';
+import {SharedModule} from './shared/shared.module';
+import {LayoutModule} from './layouts/layout.module';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestQuizComponent,
+    TestQuizComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
+    LayoutModule
   ],
   providers: [
     AuthService,
