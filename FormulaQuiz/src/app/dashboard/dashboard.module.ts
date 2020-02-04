@@ -6,6 +6,7 @@ import {LoginComponent} from './login/login.component';
 import {QuizComponent} from './quiz/quiz.component';
 import {SignupComponent} from './signup/signup.component';
 import {SharedModule} from '../shared/shared.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {SharedModule} from '../shared/shared.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

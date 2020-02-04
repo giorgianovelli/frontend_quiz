@@ -20,13 +20,11 @@ export class AuthService {
     return this.identityService.get().access_token;
   }
 
-  loginWithUsernameAndPassword(id: string, pwd: string) {
-    return this.http.post<any>(`${this.url}/login`,
-      {
-        email: id,
-        password: pwd
-      },
-    ).pipe(
+  loginWithUsernameAndPassword(emailAddress: string, pwd: string) {
+    return this.http.post<any>(`${this.url}/login`, {
+      email: emailAddress,
+      password: pwd
+    }).pipe(
         tap((user: Credentials) => {
           this.identityService.set(user);
         })
