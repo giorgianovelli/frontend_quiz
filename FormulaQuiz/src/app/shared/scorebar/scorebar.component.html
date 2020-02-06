@@ -2,11 +2,14 @@
   <div class="my-3 py-3">
     <h2 class="display-8">Score</h2>
     <div *ngIf="loading"><h2>Loading...</h2></div>
-    <ng-container  *ngIf="!loading">
-      <li *ngFor="let item of standing">
-        {{item.player}}
-        {{item.score}}
-      </li>
+    <ng-container *ngIf="!loading">
+      <ol type="1">
+        <li *ngFor="let item of standing">
+          {{item.player}}
+          {{item.score}}
+        </li>
+      </ol>
+
     </ng-container>
   </div>
 </div>

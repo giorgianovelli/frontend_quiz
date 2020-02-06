@@ -6,7 +6,7 @@ import {LoginComponent} from './login/login.component';
 import {QuizComponent} from './quiz/quiz.component';
 import {SignupComponent} from './signup/signup.component';
 import {SharedModule} from '../shared/shared.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class DashboardModule { }

@@ -1,1 +1,32 @@
-<p>quiz works!</p>
+<div class="container" *ngIf="loading"><h2>Loading...</h2></div>
+
+<ng-container class="container" *ngIf="!loading">
+
+  <div class="container" *ngIf="questionNum < dataLength; else elseBlock">
+
+    <h1 class="h3 mb-3 font-weight-normal">{{quizData[questionNum].question}}</h1>
+
+    <div class="check-container">
+      <div class="form-check" *ngFor="let item of quizData[questionNum].answers">
+        <input class="form-check-input" type="radio" name="answerRadios" id="answerRadio1" [(ngModel)]="radioValue" value="{{item}}">
+        <label class="form-check-label" for="answerRadio1">
+          {{item}}
+        </label>
+      </div>
+    </div>
+
+
+    <button class="btn btn-primary" (click)="onNext()">Next</button>
+
+  </div>
+
+  <ng-template #elseBlock>
+    <div class="container">
+      <h2>Quiz completed successfully</h2>
+      <button class="btn btn-primary" (click)="onSubmit()">Submit answers</button>
+    </div>
+  </ng-template>
+
+</ng-container>
+
+

@@ -30,5 +30,4 @@ export class LoginComponent implements OnInit {
     console.warn(this.loginForm.value.emailAddress);
     this.logIn(this.loginForm.value.emailAddress, this.loginForm.value.password);
   }
-
 }
