@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {SaveGameService} from '../core/save-game.service';
 import {Observable} from 'rxjs';
 import {Score} from '../dto/score';
 import {Quiz} from '../dto/quiz';
@@ -10,6 +9,7 @@ import {Quiz} from '../dto/quiz';
 })
 export class QuizService {
   private url = 'http://localhost:5000';
+  private data: string[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -46,14 +46,13 @@ export class QuizService {
     return this.http.post(`${this.url}/match`, postMatch , this.httpOptions );
   }
 
-  getAnswer(key) {
+  getAnswers(key) {
     return JSON.parse(localStorage.getItem(key));
   }
 
-  saveAnswer(key, data) {
-    // console.log(data);
-    localStorage.setItem(key, JSON.stringify(data));
-    // this.saveGame.appendToStorage(data);
+  saveAnswer(key, answer, index) {
+    this.data[index] = answer;
+    localStorage.setItem(key, JSON.stringify(this.data));
   }
 
   clearAnswers(key) {

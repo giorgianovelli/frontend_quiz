@@ -27,7 +27,6 @@ import {LayoutModule} from './layouts/layout.module';
   ],
   providers: [
     AuthService,
-    CookieService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

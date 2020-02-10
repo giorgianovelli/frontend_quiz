@@ -18,18 +18,10 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
   ngOnInit() {
   }
-
-  logIn(email, password) {
-    return this.authService.loginWithUsernameAndPassword(email, password)
-      .pipe(
-        tap(console.log)
-      )
-      .subscribe();
-  }
-
   onSubmit() {
-    console.warn(this.loginForm.value.emailAddress);
-    this.logIn(this.loginForm.value.emailAddress, this.loginForm.value.password);
-    this.router.navigateByUrl('/quiz?step=0');
+    return this.authService.loginWithUsernameAndPassword(this.loginForm.value.emailAddress, this.loginForm.value.password)
+      .subscribe(
+      () => this.router.navigateByUrl('/quiz?step=0')
+    );
   }
 }

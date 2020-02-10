@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {QuizService} from '../../api/quiz.service';
 import {FormGroup, FormControl} from '@angular/forms';
 import {tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,19 +16,16 @@ export class SignupComponent implements OnInit {
     password: new FormControl('')
   });
 
-  constructor(private quizService: QuizService) { }
+  constructor(private quizService: QuizService, private router: Router) { }
 
   ngOnInit() {
   }
   signup(email, name, password) {
-    return this.quizService.postSignUp(email, name, password)
-      .pipe(
-        tap(console.log)
-      )
-      .subscribe();
+    return this.quizService.postSignUp(email, name, password);
   }
   onSubmit() {
     console.warn(this.registerForm.value);
-    this.signup(this.registerForm.value.emailAddress, this.registerForm.value.name, this.registerForm.value.password);
+    this.signup(this.registerForm.value.emailAddress, this.registerForm.value.name, this.registerForm.value.password)
+      .subscribe(() => this.router.navigateByUrl('/login'));
   }
 }

@@ -1,3 +1,7 @@
 <nav class="navbar fixed-top navbar-light bg-light">
   <span class="navbar-brand mb-0 h1">Quiz</span>
+  <ng-container *ngIf="logout()">
+    <button btn btn-lg btn-primary btn-block my-2 my-sm-0 (click)="onClick()">Logout</button>
+  </ng-container>
+
 </nav>

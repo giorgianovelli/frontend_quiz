@@ -65,8 +65,8 @@ export class QuizComponent implements OnInit {
     );
   }
   onNext() {
-    this.userAnswers.push(this.radioValue);
-    this.quizService.saveAnswer('answers', this.userAnswers); // TODO
+    // this.userAnswers.push(this.radioValue);
+    this.quizService.saveAnswer('answers', this.radioValue, Number(this.activatedRoute.snapshot.queryParams.step)); // TODO
     this.radioValue = '';
     this.router.navigate([`/quiz`], { queryParams: {step: Number(this.activatedRoute.snapshot.queryParams.step) + 1}});
   }
@@ -79,6 +79,8 @@ export class QuizComponent implements OnInit {
 
     this.endTime = this.getTime();
     this.sessionTime = this.endTime - this.startTime;
+    this.userAnswers = this.quizService.getAnswers('answers');
+    console.log(this.userAnswers);
     let i = 0;
     for (const value of this.quizData) {
       if (value.rightAnswer === this.userAnswers[i]) {
@@ -87,14 +89,16 @@ export class QuizComponent implements OnInit {
       i++;
     }
     this.quizService.saveMatch(this.quizData, this.rightAnswers, this.sessionTime)
-      .pipe(tap(console.log))
-      .subscribe();
-    console.log(this.rightAnswers);
+      .pipe(
+        tap(console.log))
+      .subscribe(() => {
+        localStorage.clear();
+        this.router.navigateByUrl('/signup');
+      });
+    // console.log(this.rightAnswers);
     // console.log(this.sessionTime);
     // console.log(this.quizService.getAnswer());  TODO
-    localStorage.removeItem(this.questionKey);
+    // localStorage.removeItem(this.questionKey);
     // this.router.navigate(['signup']);
-    this.authService.logout();
-
   }
 }

@@ -7,6 +7,7 @@ import {QuizComponent} from './quiz/quiz.component';
 import {SignupComponent} from './signup/signup.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthGuard} from '../auth.guard';
 
 
 @NgModule({
@@ -21,6 +22,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     SharedModule,
     ReactiveFormsModule,
     FormsModule
+  ],
+  providers: [
+    AuthGuard
   ]
 })
 export class DashboardModule { }
