@@ -10,17 +10,14 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: AuthService, public router: Router) {}
 
   // handle your auth error or rethrow
-  private handleAuthError(err: HttpErrorResponse): Observable<any> {
+  /*private handleAuthError(err: HttpErrorResponse): Observable<any> {
     if (err.status === 401) {
-      // navigate /delete cookies or whatever
-      this.router.navigateByUrl('/login');
-      // if you've caught / handled the error, you don't want to rethrow it unless you also want downstream
-      // consumers to have to handle it as well.
-      return of(err.message); // or EMPTY may be appropriate here
+      this.router.navigateByUrl('/login'); // TODO
+      return of(err.message);
     }
     return throwError(err);
   }
-
+*/
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.auth.isLoggedIn()) {
       request = request.clone({
@@ -30,7 +27,8 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
     console.log('req: ' + request);
-    return next.handle(request).pipe(catchError(x => this.handleAuthError(x)));
+    return next.handle(request);
+    // return next.handle(request).pipe(catchError(x => this.handleAuthError(x)));
   }
 
 }

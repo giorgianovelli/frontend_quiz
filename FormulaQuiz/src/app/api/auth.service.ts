@@ -8,10 +8,8 @@ import {Credentials, IdentityService} from '../core/identity.service';
 })
 export class AuthService {
   private url = 'http://localhost:5000';
-  postLog = {
-    email: 'giorgia@gmail.com',
-    password: 'giorgia'
-  };
+  redirectUrl: string;
+
   constructor(
     private http: HttpClient,
     private identityService: IdentityService) { }
@@ -32,7 +30,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
+    this.identityService.clear();
   }
 
   isLoggedIn() {

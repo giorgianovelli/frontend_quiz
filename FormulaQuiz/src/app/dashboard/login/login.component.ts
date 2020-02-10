@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../api/auth.service';
 import {FormGroup, FormControl} from '@angular/forms';
 import {tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('')
   });
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
   ngOnInit() {
   }
 
@@ -29,5 +30,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.warn(this.loginForm.value.emailAddress);
     this.logIn(this.loginForm.value.emailAddress, this.loginForm.value.password);
+    this.router.navigateByUrl('/quiz?step=0');
   }
 }

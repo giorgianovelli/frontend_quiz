@@ -26,4 +26,8 @@ export class IdentityService {
     return localStorage.getItem(this.key);
   }
 
+  clear() {
+    localStorage.removeItem(this.key);
+  }
+
 }
