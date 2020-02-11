@@ -9,15 +9,17 @@ import {catchError} from 'rxjs/operators';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: AuthService, public router: Router) {}
 
-  // handle your auth error or rethrow
+  // handle http error or rethrow
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
     if (err.status === 401) {
-      this.router.navigateByUrl('/login'); // TODO
+      window.alert(err.error.message);
+      this.router.navigateByUrl('/login');
       return of(err.message);
     }
     if (err.status === 400) {
-      window.alert(err.error);
-      this.router.navigateByUrl('/signup'); // TODO
+      window.alert(err.error.message);
+      // console.log(err.error.message);
+      this.router.navigateByUrl('/signup');
       return of(err.message);
     }
     return throwError(err);

@@ -93,7 +93,10 @@ export class QuizComponent implements OnInit {
         tap(console.log))
       .subscribe(() => {
         localStorage.clear();
-        this.router.navigateByUrl('/signup');
+        this.router.navigateByUrl('/signup')
+          .then(() => {
+            window.location.reload();
+          });
       });
     // console.log(this.rightAnswers);
     // console.log(this.sessionTime);

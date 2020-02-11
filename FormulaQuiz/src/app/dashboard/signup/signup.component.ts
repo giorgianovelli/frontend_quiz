@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
     return this.quizService.postSignUp(email, name, password);
   }
   onSubmit() {
-    console.warn(this.registerForm.value);
+    // console.warn(this.registerForm.value);
     this.signup(this.registerForm.value.emailAddress, this.registerForm.value.name, this.registerForm.value.password)
       .subscribe(() => this.router.navigateByUrl('/login'));
   }
