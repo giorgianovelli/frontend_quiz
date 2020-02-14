@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {QuizService} from '../../api/quiz.service';
-import {finalize, switchMap, tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {Quiz} from '../../dto/quiz';
 import {ActivatedRoute, Router} from '@angular/router';
 import {of} from 'rxjs';
@@ -23,6 +23,10 @@ export class QuizComponent implements OnInit {
   questionKey = 'questions';
   endTime: number;
   sessionTime: number;
+  numRightAnswers: number;
+  score: number;
+  endQuiz: boolean = false;
+
 
   constructor(
     private quizService: QuizService,
@@ -70,13 +74,14 @@ export class QuizComponent implements OnInit {
     this.radioValue = '';
     this.router.navigate([`/quiz`], { queryParams: {step: Number(this.activatedRoute.snapshot.queryParams.step) + 1}});
   }
-  onSubmit() {
-    /*
-    domande in quizData ok
-    tempo di gioco in sessionTime ok
-    risposte esatte date dall'utente in rightAnswers ok
-     */
-
+  scoreGame(num: number): number {
+    let calc = 0;
+    if (num > 0) {
+      calc = (num * 1000) / this.sessionTime;
+    }
+    return calc;
+  }
+  endGame() {
     this.endTime = this.getTime();
     this.sessionTime = this.endTime - this.startTime;
     this.userAnswers = this.quizService.getAnswers('answers');
@@ -88,7 +93,12 @@ export class QuizComponent implements OnInit {
       }
       i++;
     }
-    this.quizService.saveMatch(this.quizData, this.rightAnswers, this.sessionTime)
+    this.numRightAnswers = this.rightAnswers.length;
+    this.score = Math.ceil(this.scoreGame(this.numRightAnswers));
+    this.endQuiz = true;
+  }
+  onSubmit() {
+    this.quizService.saveMatch(this.quizData, this.rightAnswers, this.sessionTime, this.score)
       .pipe(
         tap(console.log))
       .subscribe(() => {
@@ -98,10 +108,5 @@ export class QuizComponent implements OnInit {
             window.location.reload();
           });
       });
-    // console.log(this.rightAnswers);
-    // console.log(this.sessionTime);
-    // console.log(this.quizService.getAnswer());  TODO
-    // localStorage.removeItem(this.questionKey);
-    // this.router.navigate(['signup']);
   }
 }

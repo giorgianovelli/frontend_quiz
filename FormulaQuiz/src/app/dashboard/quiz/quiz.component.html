@@ -15,16 +15,24 @@
       </div>
     </div>
 
-
     <button class="btn btn-primary" (click)="onNext()">Next</button>
 
   </div>
 
   <ng-template #elseBlock>
-    <div class="container">
-      <h2>Quiz completed successfully</h2>
-      <button class="btn btn-primary" (click)="onSubmit()">Submit answers</button>
-    </div>
+      <div class="container">
+        <h2>Quiz completed successfully</h2>
+        <button id="btnSubmit" class="btn btn-primary" (click)="endGame()">Show results</button>
+        <br>
+        <br>
+        <br>
+        <div id="endContainer" *ngIf="endQuiz">
+          <h4>Right answers: {{numRightAnswers}}</h4>
+          <h4>Score: {{score}}</h4>
+          <button class="btn btn-primary" (click)="onSubmit()">Submit answers</button>
+        </div>
+      </div>
+
   </ng-template>
 
 </ng-container>

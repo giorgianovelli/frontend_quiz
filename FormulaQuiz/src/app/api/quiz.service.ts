@@ -36,12 +36,13 @@ export class QuizService {
       this.httpOptions);
   }
 
-  saveMatch(sessionQuiz, sessionAnswers, sessionTime) {
+  saveMatch(sessionQuiz, sessionAnswers, sessionTime, scoreGame) {
     const postMatch = {
       questions: sessionQuiz,
       right_answers: sessionAnswers,
       time: sessionTime,
-      state: 'ok'
+      state: 'ok',
+      score: scoreGame
     };
     return this.http.post(`${this.url}/match`, postMatch , this.httpOptions );
   }
