@@ -3,12 +3,13 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Score} from '../dto/score';
 import {Quiz} from '../dto/quiz';
+import {GlobalConstants} from '../common/global-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
-  private url = 'http://localhost:5000';
+  private url = GlobalConstants.apiURL;
   private data: string[] = [];
 
   httpOptions = {

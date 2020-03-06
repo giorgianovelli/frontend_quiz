@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 import {Credentials, IdentityService} from '../core/identity.service';
+import {GlobalConstants} from '../common/global-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url = 'http://localhost:5000';
+  private url = GlobalConstants.apiURL;
   redirectUrl: string;
 
   constructor(
